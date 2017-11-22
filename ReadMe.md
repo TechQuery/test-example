@@ -1,0 +1,103 @@
+# Test Example
+
+A [JSDoc](http://usejsdoc.org/) [plugin](http://usejsdoc.org/about-plugins.html) for generating test files by parsing @example.
+
+[![NPM Dependency](https://david-dm.org/TechQuery/test-example.svg)](https://david-dm.org/TechQuery/test-example)
+
+[![NPM](https://nodei.co/npm/test-example.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/test-example/)
+
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/terHRJgDULkGjswWhddcBSDJ/TechQuery/test-example'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/terHRJgDULkGjswWhddcBSDJ/TechQuery/test-example.svg' />
+</a>
+
+
+
+## Feature
+
+ 1. [BDD](https://www.agilealliance.org/glossary/bdd/) (Behavior-driven development) style Test wrapper, such as [Mocha](https://mochajs.org/)
+
+ 2. [Should](https://github.com/shouldjs/should.js) style Assertion
+
+ 3. One **Source file** to one **Test file**
+
+ 4. One **Doclet** to one `describe()`
+
+ 5. One `@example` to one `it()`
+
+
+
+## Usage
+
+After installing this package, you need merge those options below to your JSDoc `config.json`:
+
+```JSON
+{
+    "plugins":         ["node_modules/test-example"],
+    "test-example":    {
+        "sourcePath":    "path/to/source/directory",
+        "overWrite":     true
+    }
+}
+```
+
+
+## Example
+
+```JavaScript
+/**
+ * Hello function
+ *
+ * @function hello
+ *
+ * @param {string} [name="World"]
+ *
+ * @return {string}
+ *
+ * @example  No parameter
+ *
+ *     hello()    //  "Hello, World !"
+ *
+ * @example  One parameter
+ *
+ *     hello('JSDoc')    //  "Hello, JSDoc !"
+ */
+
+function hello(name) {
+
+    return  'Hello, ' + (name || 'World') + ' !';
+}
+```
+
+will generate
+
+```JavaScript
+'use strict';
+
+require('should');
+
+
+describe('hello',  function () {
+
+
+    it('No parameter',  function () {
+
+        var result = hello();
+
+        result.should.be.deepEqual( "Hello, World !" );
+    });
+
+
+    it('One parameter',  function () {
+
+        var result = hello('JSDoc');
+
+        result.should.be.deepEqual( "Hello, JSDoc !" );
+    });
+
+});
+```
+
+
+## User Case
+
+ 1. [iQuery](https://tech-query.me/iQuery.js/)
