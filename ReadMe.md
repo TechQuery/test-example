@@ -35,13 +35,16 @@ After installing this package, you need merge those options below to your JSDoc 
     "plugins":         ["node_modules/test-example"],
     "test-example":    {
         "sourcePath":    "path/to/source/directory",
-        "overWrite":     true
+        "overWrite":     true,
+        "headerFile":    "path/to/test/header.js"
     }
 }
 ```
 
 
 ## Example
+
+`source/say-sth.js`
 
 ```JavaScript
 /**
@@ -62,18 +65,20 @@ After installing this package, you need merge those options below to your JSDoc 
  *     hello('JSDoc')    //  "Hello, JSDoc !"
  */
 
-function hello(name) {
+exports.hello = function (name) {
 
     return  'Hello, ' + (name || 'World') + ' !';
-}
+};
 ```
 
-will generate
+will generate `test/say-sth.js`
 
 ```JavaScript
 'use strict';
 
 require('should');
+
+var saySth = require('../source/say-sth');
 
 
 describe('hello',  function () {
@@ -81,7 +86,7 @@ describe('hello',  function () {
 
     it('No parameter',  function () {
 
-        var result = hello();
+        var result = saySth.hello();
 
         result.should.be.deepEqual( "Hello, World !" );
     });
@@ -89,7 +94,7 @@ describe('hello',  function () {
 
     it('One parameter',  function () {
 
-        var result = hello('JSDoc');
+        var result = saySth.hello('JSDoc');
 
         result.should.be.deepEqual( "Hello, JSDoc !" );
     });

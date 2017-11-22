@@ -1,8 +1,8 @@
 {
   "name": "test-example",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A JSDoc plugin for generating test files by parsing @example",
-  "main": "index.js",
+  "main": "source/index.js",
   "engines": {
     "node": "^5.12.0"
   },
