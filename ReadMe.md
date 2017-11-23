@@ -30,9 +30,9 @@ A [JSDoc](http://usejsdoc.org/) [plugin](http://usejsdoc.org/about-plugins.html)
 
  1. `npm i test-example -O`
 
- 2. Add some [config options](test-example.html)
+ 2. Add some [config options](https://techquery.github.io/test-example/module-test-example-test-example.html)
 
- 3. [Custom hook module](global.html#EventHook) let you do more
+ 3. [Custom hook module](https://techquery.github.io/test-example/global.html#EventHook) let you do more
 
  4. `jsdoc -c path/to/config.json`
 
