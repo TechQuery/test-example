@@ -28,18 +28,16 @@ A [JSDoc](http://usejsdoc.org/) [plugin](http://usejsdoc.org/about-plugins.html)
 
 ## Usage
 
-After installing this package, you need merge those options below to your JSDoc `config.json`:
+ 1. `npm i test-example -O`
 
-```JSON
-{
-    "plugins":         ["node_modules/test-example"],
-    "test-example":    {
-        "sourcePath":    "path/to/source/directory",
-        "overWrite":     true,
-        "headerFile":    "path/to/test/header.js"
-    }
-}
-```
+ 2. Add some [config options](test-example.html)
+
+ 3. [Custom hook module](global.html#EventHook) let you do more
+
+ 4. `jsdoc -c path/to/config.json`
+
+ 5. `npm test`
+
 
 
 ## Example
@@ -56,11 +54,11 @@ After installing this package, you need merge those options below to your JSDoc 
  *
  * @return {string}
  *
- * @example  No parameter
+ * @example  // No parameter
  *
  *     hello()    //  "Hello, World !"
  *
- * @example  One parameter
+ * @example  // One parameter
  *
  *     hello('JSDoc')    //  "Hello, JSDoc !"
  */

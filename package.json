@@ -1,12 +1,13 @@
 {
   "name": "test-example",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A JSDoc plugin for generating test files by parsing @example",
   "main": "source/index.js",
   "engines": {
     "node": "^5.12.0"
   },
   "scripts": {
+    "build": "jsdoc -c ./build/document.json  &&  reduce-blank ./docs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,5 +28,10 @@
   "homepage": "https://github.com/TechQuery/test-example#readme",
   "dependencies": {
     "fs-extra": "^4.0.2"
+  },
+  "devDependencies": {
+    "docdash": "^0.4.0",
+    "jsdoc": "^3.5.5",
+    "reduce-blank": "^0.2.0"
   }
 }
