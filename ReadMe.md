@@ -24,6 +24,8 @@ A [JSDoc](http://usejsdoc.org/) [plugin](http://usejsdoc.org/about-plugins.html)
 
  5. One `@example` to one `it()`
 
+ 6. `//` also supports multiple-line code with the example result
+
 
 
 ## Usage
@@ -99,6 +101,8 @@ describe('hello',  function () {
 
 });
 ```
+[ Remark ]  A blank line is necessary between the title & code of `@example`.
+
 
 
 ## User Case

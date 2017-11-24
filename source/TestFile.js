@@ -53,7 +53,7 @@ class TestFile extends EventEmitter {
                 title:    Doclet.longname,
                 item:     Doclet.examples.map(function (item) {
 
-                    item = /^\/\/(.*?)[\r\n]+([\s\S]+?)\/\/([\s\S]+)/.exec( item );
+                    item = item.split( /^\/\/|\s+\/\/|\n\n/ );
 
                     /**
                      * **Test item** object
