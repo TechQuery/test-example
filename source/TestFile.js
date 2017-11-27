@@ -6,44 +6,52 @@
  *
  * @see {@link https://nodejs.org/dist/latest-v4.x/docs/api/events.html#events_class_eventemitter}
  */
-const Path = require('path'), EventEmitter = require('events');
+const EventEmitter = require('events'),
+      Path = require('path'),
+      StringKit = require('./StringKit');
 
 
 /**
- * **Test file** class
+ * **Test script** class
  *
  * @extends external:EventEmitter
  */
-class TestFile extends EventEmitter {
-
-    static toBigCamel(raw) {
-
-        return  raw.replace(/^\w|[_\-](\w)/g,  function (A, B) {
-
-            return  (B || A).toUpperCase();
-        });
-    }
+class TestScript extends EventEmitter {
     /**
      * @author TechQuery <shiy007@qq.com>
      *
-     * @param {string} URI - Path of a **Source module**
-     *                     (relative to the source directory)
+     * @param {string} URI        - Path of a **Source module**
+     * @param {string} sourcePath - Path of the **Source directory**
+     * @param {string} testPath   - Path of the **Test directory**
      */
-    constructor(URI) {
+    constructor(URI, sourcePath, testPath) {
 
         super().length = 0;
 
-        this.URI = URI;
+        this.sourcePath = Path.join(process.cwd(), sourcePath);
 
-        this.ID = TestFile.toBigCamel( Path.basename(URI, '.js') );
+        this.testPath = Path.join(process.cwd(), testPath);
+
+        this.URI = (
+            Path.isAbsolute( URI )  ?
+                Path.relative(this.sourcePath, URI)  :  URI
+        ).replace(/\\/g, '/');
+
+        this.testURI = Path.join(this.testPath, this.URI);
+
+        this.sourceURI = Path.relative(
+            this.testURI,  Path.join(this.sourcePath, this.URI)
+        ).replace(/\\/g, '/');
+
+        this.ID = StringKit.toBigCamel( Path.basename(URI, '.js') );
 
         this.header = [ ];
     }
 
     addHeader(raw) {
 
-        if (this.header.indexOf( raw )  <  0)
-            this.header.push( raw );
+        if (raw  &&  (this.header.indexOf( raw )  <  0))
+            this.header.push( StringKit.indent(0, raw) );
     }
 
     addUnit(Doclet) {
@@ -76,15 +84,55 @@ class TestFile extends EventEmitter {
                 })
             };
     }
+
+    getHeader() {
+        /**
+         * **Test header** object
+         *
+         * @typedef {object} TestHeader
+         *
+         * @property {string} URI         - Module URI relative to
+         *                                  the **Source directory**
+         * @property {string} sourceURI   - Module URI relative to
+         *                                  this **Test scirpt**
+         * @property {string} [source=''] - The header's source code of
+         *                                  this **Test script**
+         */
+        var header = {
+                URI:          this.URI,
+                sourceURI:    this.sourceURI,
+                source:       ''
+            };
+        /**
+         * Before the **Test script** writed
+         *
+         * @event TestScript#fileWrite
+         */
+        this.emit('fileWrite', header);
+
+        if ( header.source )  this.addHeader( header.source );
+
+        /**
+         * Before the header of **Test script** writed
+         *
+         * @event TestScript#headerWrite
+         */
+        header.source = '';
+
+        this.emit('headerWrite', header);
+
+        return  StringKit.indent(1, header.source);
+    }
+
     /**
      * @author TechQuery <shiy007@qq.com>
      * @since  0.2.0
      *
-     * @returns {string} Source code of this **Test file**
+     * @return {string} Source code of this **Test script**
      */
     toString() {
 
-        var _this_ = this;
+        var _this_ = this, header = this.getHeader();
 
         return `'use strict';
 
@@ -92,38 +140,70 @@ require('should');
 
 ${this.header.join("\n\n")}
 
+describe('${this.URI}',  function () {
+
+${header}
+
 ${Array.from(this,  function (test) {
 
     return `
-describe('${test.title}',  function () {
 
-    ${test.item.map(function (item) {
-        /**
-         * Before **Test item** writed
-         *
-         * @event TestFile#itemWrite
-         */
-        _this_.emit('itemWrite', item);
+    describe('${test.title}',  function () {
 
-        return  item.source || `
+        ${test.item.map(function (item) {
+            /**
+             * Before **Test item** writed
+             *
+             * @event TestScript#itemWrite
+             */
+            _this_.emit('itemWrite', item);
 
-    it('${item.title}',  function () {
+            return  StringKit.indent(2,  item.source || `
 
-        var result = ${item.script};
+        it('${item.title}',  function () {
 
-        result.should.be.deepEqual( ${item.expected} );
+            var result = ${item.script};
+
+            result.should.be.deepEqual( ${item.expected} );
+        });
+    `);
+        }).join('')}
     });
 `;
-    }).join('')}
-});
-`;
-}).join("\n")}`;
+}).join("\n")}
+});`;
     }
 }
 
 
 /**
- * @callback EventHook
+ * @callback fileWrite
+ *
+ * @param {TestHeader} header
+ *
+ * @example  // TestHook.js
+ *
+ *     exports.fileWrite = function (header) {
+ *
+ *         header.source = 'custom test script';
+ *     };
+ */
+
+/**
+ * @callback headerWrite
+ *
+ * @param {TestHeader} header
+ *
+ * @example  // TestHook.js
+ *
+ *     exports.headerWrite = function (header) {
+ *
+ *         header.source = 'custom test script';
+ *     };
+ */
+
+/**
+ * @callback itemWrite
  *
  * @param {TestItem} item
  *
@@ -136,4 +216,4 @@ describe('${test.title}',  function () {
  */
 
 
-module.exports = TestFile;
+module.exports = TestScript;

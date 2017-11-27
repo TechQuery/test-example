@@ -30,9 +30,9 @@ A [JSDoc](http://usejsdoc.org/) [plugin](http://usejsdoc.org/about-plugins.html)
 
 ## Usage
 
- 1. `npm i test-example -O`
+ 1. `npm i test-example -D`
 
- 2. Add some [config options](https://techquery.github.io/test-example/module-test-example-test-example.html)
+ 2. Add some [config options](https://techquery.github.io/test-example/module-test-example-config.html)
 
  3. [Custom hook module](https://techquery.github.io/test-example/global.html#EventHook) let you do more
 
@@ -107,4 +107,4 @@ describe('hello',  function () {
 
 ## User Case
 
- 1. [iQuery](https://tech-query.me/iQuery.js/)
+ 1. [iQuery.js](https://github.com/TechQuery/iQuery.js/)

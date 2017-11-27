@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestFile.html">TestFile</a><ul class='methods'><li data-type='method'><a href="TestFile.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestFile.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-test-example.html">test-example</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -50,13 +50,117 @@
 
         <h3 class="subsection-title">Type Definitions</h3>
 
-    <h4 class="name" id="EventHook"><span class="type-signature"></span>EventHook<span class="signature">(item)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="fileWrite"><span class="type-signature"></span>fileWrite<span class="signature">(header)</span><span class="type-signature"></span></h4>
 
 <dl class="details">
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line125">line 125</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line179">line 179</a>
+    </li></ul></dd>
+
+</dl>
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>// TestHook.js
+
+    exports.fileWrite = function (header) {
+
+        header.source = 'custom test script';
+    };</code></pre>
+
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+        <th>Type</th>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+
+                <td class="name"><code>header</code></td>
+
+            <td class="type">
+
+<span class="param-type"><a href="global.html#TestHeader">TestHeader</a></span>
+
+            </td>
+
+            <td class="description last"></td>
+        </tr>
+
+    </tbody>
+</table>
+
+    <h4 class="name" id="headerWrite"><span class="type-signature"></span>headerWrite<span class="signature">(header)</span><span class="type-signature"></span></h4>
+
+<dl class="details">
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line192">line 192</a>
+    </li></ul></dd>
+
+</dl>
+
+    <h5>Example</h5>
+
+    <pre class="prettyprint"><code>// TestHook.js
+
+    exports.headerWrite = function (header) {
+
+        header.source = 'custom test script';
+    };</code></pre>
+
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+        <th>Type</th>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+
+                <td class="name"><code>header</code></td>
+
+            <td class="type">
+
+<span class="param-type"><a href="global.html#TestHeader">TestHeader</a></span>
+
+            </td>
+
+            <td class="description last"></td>
+        </tr>
+
+    </tbody>
+</table>
+
+    <h4 class="name" id="itemWrite"><span class="type-signature"></span>itemWrite<span class="signature">(item)</span><span class="type-signature"></span></h4>
+
+<dl class="details">
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line205">line 205</a>
     </li></ul></dd>
 
 </dl>
@@ -102,13 +206,130 @@
     </tbody>
 </table>
 
+<h4 class="name" id="TestHeader">TestHeader</h4>
+
+<dl class="details">
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line89">line 89</a>
+    </li></ul></dd>
+
+</dl>
+
+    <h5 class="subsection-title">Properties:</h5>
+
+<table class="props">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+        <th>Type</th>
+
+        <th>Attributes</th>
+
+        <th>Default</th>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+
+                <td class="name"><code>URI</code></td>
+
+            <td class="type">
+
+<span class="param-type">string</span>
+
+            </td>
+
+                <td class="attributes">
+
+                </td>
+
+                <td class="default">
+
+                </td>
+
+            <td class="description last"><p>Module URI relative to
+                                 the <strong>Source directory</strong></p></td>
+        </tr>
+
+        <tr>
+
+                <td class="name"><code>sourceURI</code></td>
+
+            <td class="type">
+
+<span class="param-type">string</span>
+
+            </td>
+
+                <td class="attributes">
+
+                </td>
+
+                <td class="default">
+
+                </td>
+
+            <td class="description last"><p>Module URI relative to
+                                 this <strong>Test scirpt</strong></p></td>
+        </tr>
+
+        <tr>
+
+                <td class="name"><code>source</code></td>
+
+            <td class="type">
+
+<span class="param-type">string</span>
+
+            </td>
+
+                <td class="attributes">
+
+                    &lt;optional><br>
+
+                </td>
+
+                <td class="default">
+
+                    <code>''</code>
+
+                </td>
+
+            <td class="description last"><p>The header's source code of
+                                 this <strong>Test script</strong></p></td>
+        </tr>
+
+    </tbody>
+</table>
+
+<div class="description">
+    <p><strong>Test header</strong> object</p>
+</div>
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+<span class="param-type">object</span>
+
+        </li>
+    </ul>
+
 <h4 class="name" id="TestItem">TestItem</h4>
 
 <dl class="details">
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line58">line 58</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line66">line 66</a>
     </li></ul></dd>
 
 </dl>

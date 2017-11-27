@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>TestFile - Documentation</title>
+    <title>TestScript - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -22,22 +22,22 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestFile.html">TestFile</a><ul class='methods'><li data-type='method'><a href="TestFile.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestFile.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-test-example.html">test-example</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
 
-    <h1 class="page-title">TestFile</h1>
+    <h1 class="page-title">TestScript</h1>
 
 <section>
 
 <header>
 
         <h2>
-        TestFile
+        TestScript
         </h2>
 
-            <div class="class-description"><p><strong>Test file</strong> class</p></div>
+            <div class="class-description"><p><strong>Test script</strong> class</p></div>
 
 </header>
 
@@ -46,13 +46,13 @@
 
     <h2>Constructor</h2>
 
-    <h4 class="name" id="TestFile"><span class="type-signature"></span>new TestFile<span class="signature">(URI)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="TestScript"><span class="type-signature"></span>new TestScript<span class="signature">(URI, sourcePath, testPath)</span><span class="type-signature"></span></h4>
 
 <dl class="details">
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line17">line 17</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line19">line 19</a>
     </li></ul></dd>
 
 </dl>
@@ -83,8 +83,33 @@
 
             </td>
 
-            <td class="description last"><p>Path of a <strong>Source module</strong>
-                    (relative to the source directory)</p></td>
+            <td class="description last"><p>Path of a <strong>Source module</strong></p></td>
+        </tr>
+
+        <tr>
+
+                <td class="name"><code>sourcePath</code></td>
+
+            <td class="type">
+
+<span class="param-type">string</span>
+
+            </td>
+
+            <td class="description last"><p>Path of the <strong>Source directory</strong></p></td>
+        </tr>
+
+        <tr>
+
+                <td class="name"><code>testPath</code></td>
+
+            <td class="type">
+
+<span class="param-type">string</span>
+
+            </td>
+
+            <td class="description last"><p>Path of the <strong>Test directory</strong></p></td>
         </tr>
 
     </tbody>
@@ -106,7 +131,7 @@
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line85">line 85</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line133">line 133</a>
     </li></ul></dd>
 
     <dt class="tag-since">Since:</dt>
@@ -124,7 +149,7 @@
 <h5>Returns:</h5>
 
 <div class="param-desc">
-    <p>Source code of this <strong>Test file</strong></p>
+    <p>Source code of this <strong>Test script</strong></p>
 </div>
 
 <dl class="param-type">
@@ -140,13 +165,43 @@
 
         <h3 class="subsection-title">Events</h3>
 
+    <h4 class="name" id="event:fileWrite">fileWrite</h4>
+
+<dl class="details">
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line106">line 106</a>
+    </li></ul></dd>
+
+</dl>
+
+<div class="description">
+    <p>Before the <strong>Test script</strong> writed</p>
+</div>
+
+    <h4 class="name" id="event:headerWrite">headerWrite</h4>
+
+<dl class="details">
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line115">line 115</a>
+    </li></ul></dd>
+
+</dl>
+
+<div class="description">
+    <p>Before the header of <strong>Test script</strong> writed</p>
+</div>
+
     <h4 class="name" id="event:itemWrite">itemWrite</h4>
 
 <dl class="details">
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line101">line 101</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line154">line 154</a>
     </li></ul></dd>
 
 </dl>
