@@ -6,9 +6,7 @@ A [JSDoc](http://usejsdoc.org/) [plugin](http://usejsdoc.org/about-plugins.html)
 
 [![NPM](https://nodei.co/npm/test-example.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/test-example/)
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/terHRJgDULkGjswWhddcBSDJ/TechQuery/test-example'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/terHRJgDULkGjswWhddcBSDJ/TechQuery/test-example.svg' />
-</a>
+
 
 
 
