@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#addUnit">addUnit</a></li><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -37,11 +37,11 @@
  *
  * @module    {object} test-example
  *
- * @version   0.4.0
+ * @version   0.4.2 (2018-1-29)
  *
  * @see       {@link https://techquery.github.io/test-example|Offical Web site}
  *
- * @copyright TechQuery &lt;shiy007@qq.com> 2017
+ * @copyright TechQuery &lt;shiy007@qq.com> 2017-2018
  */
 const Path = require('path'), FS = require('fs-extra');
 
@@ -85,7 +85,6 @@ const hook = config.hookModule &amp;&amp; require(
       );
 
 var file;
-
 
 exports.handlers = {
     beforeParse:     function (event) {

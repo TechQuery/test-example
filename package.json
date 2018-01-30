@@ -1,6 +1,6 @@
 {
   "name": "test-example",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "A JSDoc plugin for generating test files by parsing @example",
   "main": "source/index.js",
   "engines": {
@@ -27,7 +27,8 @@
   },
   "homepage": "https://techquery.github.io/test-example/",
   "dependencies": {
-    "fs-extra": "^4.0.2"
+    "fs-extra": "^4.0.2",
+    "js-beautify": "^1.7.5"
   },
   "devDependencies": {
     "docdash": "^0.4.0",

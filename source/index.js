@@ -4,11 +4,11 @@
  *
  * @module    {object} test-example
  *
- * @version   0.4.0
+ * @version   0.4.2 (2018-1-29)
  *
  * @see       {@link https://techquery.github.io/test-example|Offical Web site}
  *
- * @copyright TechQuery <shiy007@qq.com> 2017
+ * @copyright TechQuery <shiy007@qq.com> 2017-2018
  */
 const Path = require('path'), FS = require('fs-extra');
 

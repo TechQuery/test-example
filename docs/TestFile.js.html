@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#addUnit">addUnit</a></li><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -41,8 +41,7 @@
  */
 const EventEmitter = require('events'),
       Path = require('path'),
-      StringKit = require('./StringKit');
-
+      Beautify = require('js-beautify');
 
 /**
  * **Test script** class
@@ -76,46 +75,75 @@ class TestScript extends EventEmitter {
             this.testURI,  Path.join(this.sourcePath, this.URI)
         ).replace(/\\/g, '/');
 
-        this.ID = StringKit.toBigCamel( Path.basename(URI, '.js') );
+        this.ID = TestScript.toBigCamel( Path.basename(URI, '.js') );
 
         this.header = [ ];
+    }
+
+    static toBigCamel(raw) {
+
+        return  raw.replace(/^\w|[_\-](\w)/g,  function (A, B) {
+
+            return  (B || A).toUpperCase();
+        });
     }
 
     addHeader(raw) {
 
         if (raw  &amp;&amp;  (this.header.indexOf( raw )  &lt;  0))
-            this.header.push( StringKit.indent(0, raw) );
+            this.header.push( raw );
     }
 
+    /**
+     * Add Test unit
+     *
+     * @author TechQuery
+     * @since  0.2.0
+     *
+     * @param {object} Doclet
+     *
+     * @throws {SyntaxError} While the `title`, `script` or `expected` of
+     *                       an Example is missing
+     */
     addUnit(Doclet) {
 
-        if (Doclet.examples instanceof Array)
-            this[ this.length++ ] = {
-                title:    Doclet.longname,
-                item:     Doclet.examples.map(function (item) {
+        if (! (Doclet.examples instanceof Array))  return;
 
-                    item = item.split( /^\/\/|\s+\/\/|\n\n/ );
+        var case_key = ['title', 'script', 'expected'];
 
-                    /**
-                     * **Test item** object
-                     *
-                     * @typedef {object} TestItem
-                     *
-                     * @property {string} title       - **Comment text** in the
-                     *                                  same line of `@example`
-                     * @property {string} script      - **Source code** to be tested
-                     * @property {string} expected    - Expected result
-                     * @property {string} [source=''] - Full source code of
-                     *                                  this test
-                     */
-                    return {
-                        title:       item[1].trim(),
-                        script:      item[2].trim(),
-                        expected:    item[3].trim(),
-                        source:      ''
-                    };
-                })
-            };
+        this[ this.length++ ] = {
+            title:    Doclet.longname,
+            item:     Doclet.examples.map(function (item) {
+
+                item = item.match(
+                    /^\/\/\s*(.+?)(?:\r|\n|\r\n){2,}([\s\S]+)\s+\/\/([\s\S]+)/
+                )  ||  [ ];
+                /**
+                 * **Test item** object
+                 *
+                 * @typedef {object} TestItem
+                 *
+                 * @property {string} title       - **Comment text** in the
+                 *                                  same line of `@example`
+                 * @property {string} script      - **Source code** to be tested
+                 * @property {string} expected    - Expected result
+                 * @property {string} [source=''] - Full source code of
+                 *                                  this test
+                 */
+                var test_case = {source: ''};
+
+                for (let i = 0;  case_key[i];  i++)
+                    if (! (
+                        test_case[ case_key[i] ] = (item[i + 1] || '').trim()
+                            .replace(/\r\n|\r/g, "\n")
+                    ))
+                        throw SyntaxError(
+                            `The ${case_key[i]} of ${Doclet.longname} is missing`
+                        );
+
+                return  test_case;
+            })
+        };
     }
 
     getHeader() {
@@ -154,7 +182,7 @@ class TestScript extends EventEmitter {
 
         this.emit('headerWrite', header);
 
-        return  StringKit.indent(1, header.source);
+        return header.source;
     }
 
     /**
@@ -167,47 +195,42 @@ class TestScript extends EventEmitter {
 
         var _this_ = this, header = this.getHeader();
 
-        return `'use strict';
+        return  Beautify(`'use strict';
 
-require('should');
+            require('should');
 
-${this.header.join("\n\n")}
+            ${this.header.join("\n\n")}
 
-describe('${this.URI}',  function () {
+            describe('${this.URI}',  function () {
 
-${header}
+                ${header}
 
-${Array.from(this,  function (test) {
+            ${Array.from(this,  function (test) {
 
-    return `
+                return `describe('${test.title}',  function () {
 
-    describe('${test.title}',  function () {
+                    ${test.item.map(function (item) {
+                        /**
+                         * Before **Test item** writed
+                         *
+                         * @event TestScript#itemWrite
+                         */
+                        _this_.emit('itemWrite', item);
 
-        ${test.item.map(function (item) {
-            /**
-             * Before **Test item** writed
-             *
-             * @event TestScript#itemWrite
-             */
-            _this_.emit('itemWrite', item);
+                        return  item.source || `it('${item.title}',  function () {
 
-            return  StringKit.indent(2,  item.source || `
+                            var result = ${item.script};
 
-        it('${item.title}',  function () {
-
-            var result = ${item.script};
-
-            result.should.be.deepEqual( ${item.expected} );
-        });
-    `);
-        }).join('')}
-    });
-`;
-}).join("\n")}
-});`;
+                            result.should.be.deepEqual( ${item.expected} );
+                        });`;
+                    }).join('')}
+                    });
+                `;
+            }).join("\n")}
+            });`
+        );
     }
 }
-
 
 /**
  * @callback fileWrite
@@ -247,7 +270,6 @@ ${Array.from(this,  function (test) {
  *         item.source = 'custom test script';
  *     };
  */
-
 
 module.exports = TestScript;
 </code></pre>

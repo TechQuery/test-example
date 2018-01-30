@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TestScript.html">TestScript</a><ul class='methods'><li data-type='method'><a href="TestScript.html#addUnit">addUnit</a></li><li data-type='method'><a href="TestScript.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-test-example.html">test-example</a></li></ul><h3>Externals</h3><ul><li><a href="external-EventEmitter.html">EventEmitter</a></li></ul><h3>Events</h3><ul><li><a href="TestScript.html#event:fileWrite">fileWrite</a></li><li><a href="TestScript.html#event:headerWrite">headerWrite</a></li><li><a href="TestScript.html#event:itemWrite">itemWrite</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-test-example-config.html">config</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -56,19 +56,14 @@
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line179">line 179</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line204">line 204</a>
     </li></ul></dd>
 
 </dl>
 
     <h5>Example</h5>
 
-    <pre class="prettyprint"><code>// TestHook.js
-
-    exports.fileWrite = function (header) {
-
-        header.source = 'custom test script';
-    };</code></pre>
+    <pre class="prettyprint"><code>// TestHook.js    exports.fileWrite = function (header) {        header.source = 'custom test script';    };</code></pre>
 
     <h5>Parameters:</h5>
 
@@ -108,19 +103,14 @@
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line192">line 192</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line217">line 217</a>
     </li></ul></dd>
 
 </dl>
 
     <h5>Example</h5>
 
-    <pre class="prettyprint"><code>// TestHook.js
-
-    exports.headerWrite = function (header) {
-
-        header.source = 'custom test script';
-    };</code></pre>
+    <pre class="prettyprint"><code>// TestHook.js    exports.headerWrite = function (header) {        header.source = 'custom test script';    };</code></pre>
 
     <h5>Parameters:</h5>
 
@@ -160,19 +150,14 @@
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line205">line 205</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line230">line 230</a>
     </li></ul></dd>
 
 </dl>
 
     <h5>Example</h5>
 
-    <pre class="prettyprint"><code>// TestHook.js
-
-    exports.itemWrite = function (item) {
-
-        item.source = 'custom test script';
-    };</code></pre>
+    <pre class="prettyprint"><code>// TestHook.js    exports.itemWrite = function (item) {        item.source = 'custom test script';    };</code></pre>
 
     <h5>Parameters:</h5>
 
@@ -212,7 +197,7 @@
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line89">line 89</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line118">line 118</a>
     </li></ul></dd>
 
 </dl>
@@ -329,7 +314,7 @@
 
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line66">line 66</a>
+        <a href="TestFile.js.html">TestFile.js</a>, <a href="TestFile.js.html#line89">line 89</a>
     </li></ul></dd>
 
 </dl>
